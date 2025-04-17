@@ -209,13 +209,36 @@ function restart() {
 }
 
 function exportImage() {
-  html2canvas(document.body).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'life-calendar.png';
-    link.href = canvas.toDataURL();
-    link.click();
-  });
+  const viewSelector = document.getElementById("viewModeContainer");
+  const buttons = document.getElementById("actionButtons");
+
+  // Ocultar temporalmente los elementos
+  viewSelector.style.display = "none";
+  buttons.style.display = "none";
+
+  // Esperar un poco para asegurar que se ocultaron antes de capturar
+  setTimeout(() => {
+    html2canvas(document.body).then(canvas => {
+      // Generar nombre con fecha
+      const today = new Date();
+      const dateString = today.toISOString().split("T")[0]; // YYYY-MM-DD
+      const link = document.createElement('a');
+      link.download = `life-calendar-${dateString}.png`;
+      link.href = canvas.toDataURL();
+      link.click();
+
+      // Restaurar visibilidad
+      viewSelector.style.display = "inline-block";
+      buttons.style.display = "block";
+    }).catch(err => {
+      console.error("Export failed:", err);
+      // Restaurar en caso de error también
+      viewSelector.style.display = "inline-block";
+      buttons.style.display = "block";
+    });
+  }, 300); // ligero delay para asegurar ocultamiento visual
 }
+
 function startReflectionRotation(reflections) {
   let currentIndex = Math.floor(Math.random() * reflections.length);
   const container = document.getElementById("reflectionText");
