@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Life Calendar</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Life Calendar</h1>
+    <select id="languageSelector" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+    </select>
+  </header>
+
+  <h2 id="mainTitle">How many months have you lived?</h2>
+  <p id="mainDesc">Enter your date of birth to visualize your life in months (based on a 90-year life expectancy).</p>
+
+  <div id="inputContainer">
+    <input type="date" id="birthDate" />
+    <button onclick="calculate()" id="calculateBtn">Calculate</button>
+  </div>
+
+  <div id="actionButtons" style="display:none; margin-top: 20px;">
+    <button onclick="restart()" id="restartBtn">Restart</button>
+    <button onclick="exportImage()" id="exportBtn">Export as Image</button>
+  </div>
+
+  <div id="stats" class="stats"></div>
+  <div id="grid" class="square-grid"></div>
+  <div id="legend" class="legend" style="display:none;">
+    <span id="legendText">1 row = 36 months = 3 years</span>
+  </div>
+
+  <footer>
+    <p>Made with ❤️ by <a href="https://github.com/antonydis" target="_blank">Antony</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
